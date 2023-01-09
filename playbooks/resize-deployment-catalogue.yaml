@@ -7,12 +7,12 @@
         
     - name: PlaybookToRun
       ansible.builtin.debug:
-        var: vars.rulebook_extra_vars.fact.playbookToRun
+        var: vars.rulebook_extra_vars.playbookToRun
 
 
     - name: debug
       ansible.builtin.debug:
-        var: vars.rulebook_extra_vars.fact
+        var: vars.rulebook_extra_vars
 
 
     - name: 🚀 AWX - Get AWX URL
@@ -51,7 +51,7 @@
     - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
       shell: |
         export playbooks=$(curl -X "GET" "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
-        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ vars.rulebook_extra_vars.fact.playbookToRun }}"))|'.id''|head -n1)
+        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ vars.rulebook_extra_vars.playbookToRun }}"))|'.id''|head -n1)
         echo "playbookID: $playbookID"
 
 

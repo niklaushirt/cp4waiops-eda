@@ -1,0 +1,881 @@
+{
+  "count": 5,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 10,
+      "type": "job_template",
+      "url": "/api/v2/job_templates/10/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "modified_by": "/api/v2/users/1/",
+        "labels": "/api/v2/job_templates/10/labels/",
+        "inventory": "/api/v2/inventories/2/",
+        "project": "/api/v2/projects/8/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/job_templates/10/credentials/",
+        "execution_environment": "/api/v2/execution_environments/3/",
+        "jobs": "/api/v2/job_templates/10/jobs/",
+        "schedules": "/api/v2/job_templates/10/schedules/",
+        "activity_stream": "/api/v2/job_templates/10/activity_stream/",
+        "launch": "/api/v2/job_templates/10/launch/",
+        "webhook_key": "/api/v2/job_templates/10/webhook_key/",
+        "webhook_receiver": "",
+        "notification_templates_started": "/api/v2/job_templates/10/notification_templates_started/",
+        "notification_templates_success": "/api/v2/job_templates/10/notification_templates_success/",
+        "notification_templates_error": "/api/v2/job_templates/10/notification_templates_error/",
+        "access_list": "/api/v2/job_templates/10/access_list/",
+        "survey_spec": "/api/v2/job_templates/10/survey_spec/",
+        "object_roles": "/api/v2/job_templates/10/object_roles/",
+        "instance_groups": "/api/v2/job_templates/10/instance_groups/",
+        "slice_workflow_jobs": "/api/v2/job_templates/10/slice_workflow_jobs/",
+        "copy": "/api/v2/job_templates/10/copy/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 2,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "has_active_failures": false,
+          "total_hosts": 0,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 3,
+          "name": "CP4WAIOPS Execution Environment",
+          "description": "CP4WAIOPS Execution Environment",
+          "image": "niklaushirt/cp4waiops-awx:0.1.4"
+        },
+        "project": {
+          "id": 8,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "object_roles": {
+          "admin_role": {
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin",
+            "id": 46
+          },
+          "execute_role": {
+            "description": "May run the job template",
+            "name": "Execute",
+            "id": 47
+          },
+          "read_role": {
+            "description": "May view settings for the job template",
+            "name": "Read",
+            "id": 48
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "delete": true,
+          "start": true,
+          "schedule": true,
+          "copy": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [],
+        "credentials": []
+      },
+      "created": "2023-01-02T11:25:23.119329Z",
+      "modified": "2023-01-02T11:25:23.119346Z",
+      "name": "CP4WAIOPS Create Robotshop Ratings Outage",
+      "description": "Create Robotshop Ratings Outage",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 8,
+      "playbook": "cp4waiops/robotshop-restart/stop-ratings.yaml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "PROVIDE: my_k8s_apiurl and my_k8s_apikey",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "last_job_run": null,
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "never updated",
+      "execution_environment": 3,
+      "host_config_key": "",
+      "ask_scm_branch_on_launch": false,
+      "ask_diff_mode_on_launch": false,
+      "ask_variables_on_launch": true,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_verbosity_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "diff_mode": false,
+      "allow_simultaneous": false,
+      "custom_virtualenv": null,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null
+    },
+    {
+      "id": 9,
+      "type": "job_template",
+      "url": "/api/v2/job_templates/9/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "modified_by": "/api/v2/users/1/",
+        "labels": "/api/v2/job_templates/9/labels/",
+        "inventory": "/api/v2/inventories/2/",
+        "project": "/api/v2/projects/8/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/job_templates/9/credentials/",
+        "last_job": "/api/v2/jobs/2002/",
+        "execution_environment": "/api/v2/execution_environments/3/",
+        "jobs": "/api/v2/job_templates/9/jobs/",
+        "schedules": "/api/v2/job_templates/9/schedules/",
+        "activity_stream": "/api/v2/job_templates/9/activity_stream/",
+        "launch": "/api/v2/job_templates/9/launch/",
+        "webhook_key": "/api/v2/job_templates/9/webhook_key/",
+        "webhook_receiver": "",
+        "notification_templates_started": "/api/v2/job_templates/9/notification_templates_started/",
+        "notification_templates_success": "/api/v2/job_templates/9/notification_templates_success/",
+        "notification_templates_error": "/api/v2/job_templates/9/notification_templates_error/",
+        "access_list": "/api/v2/job_templates/9/access_list/",
+        "survey_spec": "/api/v2/job_templates/9/survey_spec/",
+        "object_roles": "/api/v2/job_templates/9/object_roles/",
+        "instance_groups": "/api/v2/job_templates/9/instance_groups/",
+        "slice_workflow_jobs": "/api/v2/job_templates/9/slice_workflow_jobs/",
+        "copy": "/api/v2/job_templates/9/copy/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 2,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "has_active_failures": false,
+          "total_hosts": 0,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 3,
+          "name": "CP4WAIOPS Execution Environment",
+          "description": "CP4WAIOPS Execution Environment",
+          "image": "niklaushirt/cp4waiops-awx:0.1.4"
+        },
+        "project": {
+          "id": 8,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "last_job": {
+          "id": 2002,
+          "name": "CP4WAIOPS Mitigate Robotshop Ratings Outage",
+          "description": "Mitigate Robotshop Ratings Outage",
+          "finished": "2023-01-07T08:17:13.358632Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 2002,
+          "name": "CP4WAIOPS Mitigate Robotshop Ratings Outage",
+          "description": "Mitigate Robotshop Ratings Outage",
+          "status": "successful",
+          "failed": false
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "object_roles": {
+          "admin_role": {
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin",
+            "id": 43
+          },
+          "execute_role": {
+            "description": "May run the job template",
+            "name": "Execute",
+            "id": 44
+          },
+          "read_role": {
+            "description": "May view settings for the job template",
+            "name": "Read",
+            "id": 45
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "delete": true,
+          "start": true,
+          "schedule": true,
+          "copy": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "id": 2002,
+            "status": "successful",
+            "finished": "2023-01-07T08:17:13.358632Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 2001,
+            "status": "successful",
+            "finished": "2023-01-07T08:16:56.967126Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 2000,
+            "status": "successful",
+            "finished": "2023-01-07T08:16:37.900271Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1999,
+            "status": "successful",
+            "finished": "2023-01-07T08:16:10.990008Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1998,
+            "status": "successful",
+            "finished": "2023-01-07T08:15:49.836867Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1997,
+            "status": "successful",
+            "finished": "2023-01-07T08:15:34.040289Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1996,
+            "status": "successful",
+            "finished": "2023-01-06T16:52:37.598130Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1995,
+            "status": "successful",
+            "finished": "2023-01-06T16:52:17.686250Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1994,
+            "status": "successful",
+            "finished": "2023-01-06T16:52:03.527273Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 1993,
+            "status": "successful",
+            "finished": "2023-01-06T16:51:37.460429Z",
+            "canceled_on": null,
+            "type": "job"
+          }
+        ],
+        "credentials": []
+      },
+      "created": "2023-01-02T11:25:21.997053Z",
+      "modified": "2023-01-02T11:25:21.997069Z",
+      "name": "CP4WAIOPS Mitigate Robotshop Ratings Outage",
+      "description": "Mitigate Robotshop Ratings Outage",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 8,
+      "playbook": "cp4waiops/robotshop-restart/start-ratings.yaml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "PROVIDE: my_k8s_apiurl and my_k8s_apikey",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "last_job_run": "2023-01-07T08:17:13.358632Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "execution_environment": 3,
+      "host_config_key": "",
+      "ask_scm_branch_on_launch": false,
+      "ask_diff_mode_on_launch": false,
+      "ask_variables_on_launch": true,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_verbosity_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "diff_mode": false,
+      "allow_simultaneous": false,
+      "custom_virtualenv": null,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null
+    },
+    {
+      "id": 11,
+      "type": "job_template",
+      "url": "/api/v2/job_templates/11/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "modified_by": "/api/v2/users/1/",
+        "labels": "/api/v2/job_templates/11/labels/",
+        "inventory": "/api/v2/inventories/2/",
+        "project": "/api/v2/projects/8/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/job_templates/11/credentials/",
+        "execution_environment": "/api/v2/execution_environments/3/",
+        "jobs": "/api/v2/job_templates/11/jobs/",
+        "schedules": "/api/v2/job_templates/11/schedules/",
+        "activity_stream": "/api/v2/job_templates/11/activity_stream/",
+        "launch": "/api/v2/job_templates/11/launch/",
+        "webhook_key": "/api/v2/job_templates/11/webhook_key/",
+        "webhook_receiver": "",
+        "notification_templates_started": "/api/v2/job_templates/11/notification_templates_started/",
+        "notification_templates_success": "/api/v2/job_templates/11/notification_templates_success/",
+        "notification_templates_error": "/api/v2/job_templates/11/notification_templates_error/",
+        "access_list": "/api/v2/job_templates/11/access_list/",
+        "survey_spec": "/api/v2/job_templates/11/survey_spec/",
+        "object_roles": "/api/v2/job_templates/11/object_roles/",
+        "instance_groups": "/api/v2/job_templates/11/instance_groups/",
+        "slice_workflow_jobs": "/api/v2/job_templates/11/slice_workflow_jobs/",
+        "copy": "/api/v2/job_templates/11/copy/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 2,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "has_active_failures": false,
+          "total_hosts": 0,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 3,
+          "name": "CP4WAIOPS Execution Environment",
+          "description": "CP4WAIOPS Execution Environment",
+          "image": "niklaushirt/cp4waiops-awx:0.1.4"
+        },
+        "project": {
+          "id": 8,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "object_roles": {
+          "admin_role": {
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin",
+            "id": 49
+          },
+          "execute_role": {
+            "description": "May run the job template",
+            "name": "Execute",
+            "id": 50
+          },
+          "read_role": {
+            "description": "May view settings for the job template",
+            "name": "Read",
+            "id": 51
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "delete": true,
+          "start": true,
+          "schedule": true,
+          "copy": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [],
+        "credentials": []
+      },
+      "created": "2023-01-02T11:25:24.038865Z",
+      "modified": "2023-01-02T11:25:24.038881Z",
+      "name": "CP4WAIOPS Start Robotshop Ratings",
+      "description": "Start Robotshop Ratings",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 8,
+      "playbook": "cp4waiops/robotshop-restart/restart-ratings-start.yaml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "PROVIDE: my_k8s_apiurl and my_k8s_apikey",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "last_job_run": null,
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "never updated",
+      "execution_environment": 3,
+      "host_config_key": "",
+      "ask_scm_branch_on_launch": false,
+      "ask_diff_mode_on_launch": false,
+      "ask_variables_on_launch": true,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_verbosity_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "diff_mode": false,
+      "allow_simultaneous": false,
+      "custom_virtualenv": null,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null
+    },
+    {
+      "id": 12,
+      "type": "job_template",
+      "url": "/api/v2/job_templates/12/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "modified_by": "/api/v2/users/1/",
+        "labels": "/api/v2/job_templates/12/labels/",
+        "inventory": "/api/v2/inventories/2/",
+        "project": "/api/v2/projects/8/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/job_templates/12/credentials/",
+        "execution_environment": "/api/v2/execution_environments/3/",
+        "jobs": "/api/v2/job_templates/12/jobs/",
+        "schedules": "/api/v2/job_templates/12/schedules/",
+        "activity_stream": "/api/v2/job_templates/12/activity_stream/",
+        "launch": "/api/v2/job_templates/12/launch/",
+        "webhook_key": "/api/v2/job_templates/12/webhook_key/",
+        "webhook_receiver": "",
+        "notification_templates_started": "/api/v2/job_templates/12/notification_templates_started/",
+        "notification_templates_success": "/api/v2/job_templates/12/notification_templates_success/",
+        "notification_templates_error": "/api/v2/job_templates/12/notification_templates_error/",
+        "access_list": "/api/v2/job_templates/12/access_list/",
+        "survey_spec": "/api/v2/job_templates/12/survey_spec/",
+        "object_roles": "/api/v2/job_templates/12/object_roles/",
+        "instance_groups": "/api/v2/job_templates/12/instance_groups/",
+        "slice_workflow_jobs": "/api/v2/job_templates/12/slice_workflow_jobs/",
+        "copy": "/api/v2/job_templates/12/copy/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 2,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "has_active_failures": false,
+          "total_hosts": 0,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 3,
+          "name": "CP4WAIOPS Execution Environment",
+          "description": "CP4WAIOPS Execution Environment",
+          "image": "niklaushirt/cp4waiops-awx:0.1.4"
+        },
+        "project": {
+          "id": 8,
+          "name": "CP4WAIOPS Runbooks",
+          "description": "CP4WAIOPS Runbooks",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "object_roles": {
+          "admin_role": {
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin",
+            "id": 52
+          },
+          "execute_role": {
+            "description": "May run the job template",
+            "name": "Execute",
+            "id": 53
+          },
+          "read_role": {
+            "description": "May view settings for the job template",
+            "name": "Read",
+            "id": 54
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "delete": true,
+          "start": true,
+          "schedule": true,
+          "copy": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [],
+        "credentials": []
+      },
+      "created": "2023-01-02T11:25:24.760081Z",
+      "modified": "2023-01-02T11:25:24.760096Z",
+      "name": "CP4WAIOPS Stop Robotshop Ratings",
+      "description": "Stop Robotshop Ratings",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 8,
+      "playbook": "cp4waiops/robotshop-restart/restart-ratings-stop.yaml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "PROVIDE: my_k8s_apiurl and my_k8s_apikey",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "last_job_run": null,
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "never updated",
+      "execution_environment": 3,
+      "host_config_key": "",
+      "ask_scm_branch_on_launch": false,
+      "ask_diff_mode_on_launch": false,
+      "ask_variables_on_launch": true,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_verbosity_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "diff_mode": false,
+      "allow_simultaneous": false,
+      "custom_virtualenv": null,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null
+    },
+    {
+      "id": 7,
+      "type": "job_template",
+      "url": "/api/v2/job_templates/7/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "modified_by": "/api/v2/users/1/",
+        "labels": "/api/v2/job_templates/7/labels/",
+        "inventory": "/api/v2/inventories/1/",
+        "project": "/api/v2/projects/6/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/job_templates/7/credentials/",
+        "last_job": "/api/v2/jobs/2006/",
+        "jobs": "/api/v2/job_templates/7/jobs/",
+        "schedules": "/api/v2/job_templates/7/schedules/",
+        "activity_stream": "/api/v2/job_templates/7/activity_stream/",
+        "launch": "/api/v2/job_templates/7/launch/",
+        "webhook_key": "/api/v2/job_templates/7/webhook_key/",
+        "webhook_receiver": "",
+        "notification_templates_started": "/api/v2/job_templates/7/notification_templates_started/",
+        "notification_templates_success": "/api/v2/job_templates/7/notification_templates_success/",
+        "notification_templates_error": "/api/v2/job_templates/7/notification_templates_error/",
+        "access_list": "/api/v2/job_templates/7/access_list/",
+        "survey_spec": "/api/v2/job_templates/7/survey_spec/",
+        "object_roles": "/api/v2/job_templates/7/object_roles/",
+        "instance_groups": "/api/v2/job_templates/7/instance_groups/",
+        "slice_workflow_jobs": "/api/v2/job_templates/7/slice_workflow_jobs/",
+        "copy": "/api/v2/job_templates/7/copy/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 1,
+          "name": "Demo Inventory",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "project": {
+          "id": 6,
+          "name": "Demo Project",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "last_job": {
+          "id": 2006,
+          "name": "Demo Job Template",
+          "description": "",
+          "finished": "2023-01-09T17:28:09.926040Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 2006,
+          "name": "Demo Job Template",
+          "description": "",
+          "status": "successful",
+          "failed": false
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "object_roles": {
+          "admin_role": {
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin",
+            "id": 31
+          },
+          "execute_role": {
+            "description": "May run the job template",
+            "name": "Execute",
+            "id": 32
+          },
+          "read_role": {
+            "description": "May view settings for the job template",
+            "name": "Read",
+            "id": 33
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "delete": true,
+          "start": true,
+          "schedule": true,
+          "copy": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "id": 2006,
+            "status": "successful",
+            "finished": "2023-01-09T17:28:09.926040Z",
+            "canceled_on": null,
+            "type": "job"
+          },
+          {
+            "id": 2004,
+            "status": "successful",
+            "finished": "2023-01-09T17:17:11.105637Z",
+            "canceled_on": null,
+            "type": "job"
+          }
+        ],
+        "credentials": [
+          {
+            "id": 1,
+            "name": "Demo Credential",
+            "description": "",
+            "kind": "ssh",
+            "cloud": false
+          }
+        ]
+      },
+      "created": "2023-01-02T11:23:45.849716Z",
+      "modified": "2023-01-02T11:23:45.849730Z",
+      "name": "Demo Job Template",
+      "description": "",
+      "job_type": "run",
+      "inventory": 1,
+      "project": 6,
+      "playbook": "hello_world.yml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "last_job_run": "2023-01-09T17:28:09.926040Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "execution_environment": null,
+      "host_config_key": "",
+      "ask_scm_branch_on_launch": false,
+      "ask_diff_mode_on_launch": false,
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_verbosity_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "diff_mode": false,
+      "allow_simultaneous": false,
+      "custom_virtualenv": null,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null
+    }
+  ]
+}

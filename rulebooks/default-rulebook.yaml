@@ -33,7 +33,7 @@
       action:
         run_playbook:
           name: ./playbooks/resize-deployment-catalogue.yaml
-          var_root: payload
+          #var_root: payload
 
     - name: Turbo Resize
       condition: 

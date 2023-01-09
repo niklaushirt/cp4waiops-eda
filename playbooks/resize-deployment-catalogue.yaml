@@ -12,6 +12,11 @@
       ignore_errors: true
       register: ACT_AWX_URL
 
+    - name: 🛰️  AWX_RESULT
+      debug: 
+        msg="{{ ACT_AWX_URL.stdout }}"
+
+
     - name: 🚀 AWX - Set Fact AWX_URL {{ ACT_AWX_URL.stdout }} 
       set_fact: AWX_URL={{ ACT_AWX_URL.stdout }} 
 
@@ -22,6 +27,10 @@
         echo $ADMIN_PASSWORD
       ignore_errors: true
       register: ACT_AWX_PWD
+
+    - name: 🛰️  AWX_RESULT
+      debug: 
+        msg="{{ ACT_AWX_PWD.stdout }}"
 
 
     - name: 🚀 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 

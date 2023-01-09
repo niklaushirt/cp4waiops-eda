@@ -25,7 +25,7 @@
           name: ./playbooks/ping.yaml
 
     - name: Turbo Resize - catalogue
-      condition: event.payload.actionType == "RESIZE" and event.payload.actionState == "READY"
+      condition: event.payload.actionType == "RESIZE" and event.payload.actionState == "READY" and event.payload.target.displayName == "catalogue"
       action:
         run_playbook:
           name: ./playbooks/resize-deployment-catalogue.yaml

@@ -3,3 +3,57 @@
   tasks:
     - debug:
         msg: "Turbonomic Resize Catalogue"
+        
+    - name: 🚀 AWX - Get AWX URL
+      shell: |
+        export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})
+        export AWX_URL=$(echo "https://$AWX_ROUTE")
+        echo $AWX_URL
+      ignore_errors: true
+      register: ACT_AWX_URL
+
+    - name: 🚀 AWX - Set Fact AWX_URL {{ ACT_AWX_URL.stdout }} 
+      set_fact: AWX_URL={{ ACT_AWX_URL.stdout }} 
+
+
+    - name: 🚀 AWX - Get AWX Password
+      shell: |
+        export ADMIN_PASSWORD=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
+        echo $ADMIN_PASSWORD
+      ignore_errors: true
+      register: ACT_AWX_PWD
+
+
+    - name: 🚀 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 
+      set_fact: AWX_PWD={{ ACT_AWX_PWD.stdout }} 
+
+    - name: 🚀 AWX - Create AWX Execution Environment
+      shell: |
+        export RUNNER_IMAGE=niklaushirt/cp4waiops-awx:0.1.4
+        export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/execution_environments/" -u "admin:{{ AWX_PWD }}" --insecure \
+        -H 'content-type: application/json' \
+        -d $'{
+          "name": "CP4WAIOPS Execution Environment",
+          "description": "CP4WAIOPS Execution Environment",
+          "organization": null,
+          "image": "'$RUNNER_IMAGE'",
+          "credential": null,
+          "pull": "missing"
+        }')
+
+        if [[ $result =~ " already exists" ]];
+        then
+            export EXENV_ID=$(curl -X "GET" -s "{{ AWX_URL }}/api/v2/execution_environments/" -u "admin:{{ AWX_PWD }}" --insecure|jq -c '.results[]| select( .name == "CP4WAIOPS Execution Environment")|.id')
+        else
+            export EXENV_ID=$(echo $result|jq ".id")
+            sleep 60
+        fi 
+        echo "$EXENV_ID"
+      ignore_errors: true
+      register: EXENV_ID
+      args:
+        executable: /bin/bash
+
+    - name: 🛰️  START - LOAD AWX RUNBOOKS
+      debug: 
+        msg="{{ EXENV_ID.stdout }}"

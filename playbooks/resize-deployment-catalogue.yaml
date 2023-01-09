@@ -30,7 +30,7 @@
 
     - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
       shell: |
-        export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/job_templates/7/launch" -u "admin:{{ AWX_PWD }}" --insecure \
+        export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/job_templates/7/launch/" -u "admin:{{ AWX_PWD }}" --insecure \
         -H 'content-type: application/json' \
         -d $'{}')
 
@@ -45,4 +45,3 @@
         msg="{{ AWX_RESULT.stdout }}"
 
 
-      

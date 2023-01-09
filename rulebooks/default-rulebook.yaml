@@ -33,7 +33,11 @@
       action:
         run_playbook:
           name: ./playbooks/resize-deployment-catalogue.yaml
-          #var_root: payload
+          rulebook_extra_vars:
+             fact.playbook: hello world
+             fact.param1: 1
+             fact.param2: R2D2
+             fact.param3: Naboo
 
     - name: Turbo Resize
       condition: 

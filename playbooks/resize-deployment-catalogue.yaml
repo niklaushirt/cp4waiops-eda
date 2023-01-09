@@ -40,8 +40,7 @@
     - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
       shell: |
         export playbooks=$(curl -X "GET" "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
-        echo "playbookID: $playbooks"
-        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("CP4"))|'.id'')|head -n1
+        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("CP4"))|'.id''|head -n1)
         echo "playbookID: $playbookID"
 
 

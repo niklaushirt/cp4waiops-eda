@@ -5,9 +5,9 @@
     - debug:
         msg: "Turbonomic Resize Catalogue"
         
-    - name: debug
+    - name: PlaybookToRun
       ansible.builtin.debug:
-        var: playbookToRun
+        var: vars.rulebook_extra_vars.fact.playbookToRun
 
 
     - name: debug
@@ -51,7 +51,7 @@
     - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
       shell: |
         export playbooks=$(curl -X "GET" "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
-        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ playbookToRun }}"))|'.id''|head -n1)
+        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ vars.rulebook_extra_vars.fact.playbookToRun }}"))|'.id''|head -n1)
         echo "playbookID: $playbookID"
 
 

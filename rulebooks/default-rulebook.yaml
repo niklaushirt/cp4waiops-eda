@@ -14,17 +14,27 @@
   rules:
     - name: Say Hello
       condition: event.payload.message == "Ansible is super cool!"
-
-  ## Define the action we should take should the condition be met
-
       action:
         run_playbook:
           name: ./playbooks/say-what.yaml
+
     - name: Ping
       condition: event.payload.message == "ping"
-
-  ## Define the action we should take should the condition be met
-
       action:
         run_playbook:
           name: ./playbooks/ping.yaml
+
+
+    - name: Turbo Resize
+      condition: event.payload.actionType == "RESIZE" and event.payload.actionState == "READY"
+      action:
+        run_playbook:
+          name: ./playbooks/resize-deployment.yaml
+
+    - name: Turbo Resize - catalogue
+      condition: event.payload.actionType == "RESIZE" and event.payload.actionState == "READY"
+      action:
+        run_playbook:
+          name: ./playbooks/resize-deployment-catalogue.yaml
+
+          

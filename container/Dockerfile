@@ -38,5 +38,5 @@ COPY ./playbooks ./playbooks
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
 
-CMD ansible-rulebook --rulebook ./rulebooks/default-rulebook.yaml -i inventory.yaml --verbose
+ENTRYPOINT /home/app/startup.sh
 

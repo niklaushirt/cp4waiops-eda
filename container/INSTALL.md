@@ -20,3 +20,9 @@ oc expose svc eda-frontend -n eda --name test
 
 
 91.121.172.228
+
+
+
+
+
+

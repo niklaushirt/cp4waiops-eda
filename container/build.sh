@@ -1,5 +1,20 @@
 #!/bin/bash
 
+git clone https://github.com/niklaushirt/cp4waiops-eda.git
+cd cp4waiops-eda/container/
+
+
+export CONT_VERSION=0.1
+docker build -t niklaushirt/eda-container:$CONT_VERSION .
+docker push niklaushirt/eda-container:$CONT_VERSION
+
+
+
+exit 1
+
+
+
+
 export CONT_VERSION=2.0
 
 # Build Production AMD64

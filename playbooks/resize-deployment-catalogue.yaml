@@ -1,8 +1,13 @@
 - hosts: localhost
   connection: local
+  gather_facts: true
   tasks:
     - debug:
         msg: "Turbonomic Resize Catalogue"
+        
+    - name: debug
+      ansible.builtin.debug:
+        var: fact
         
     - name: 🚀 AWX - Get AWX URL
       shell: |

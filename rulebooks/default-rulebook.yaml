@@ -32,12 +32,13 @@
           - event.payload.target.displayName == "catalogue"
       action:
         run_playbook:
-          name: ./playbooks/resize-deployment-catalogue.yaml
+          name: ./playbooks/generic-awx-runner.yaml
           rulebook_extra_vars:
              playbookToRun: Demo
              param1: 1
              param2: R2D2
              param3: Naboo
+
 
     - name: Turbo Resize
       condition: 
@@ -46,7 +47,12 @@
           - event.payload.actionState == "READY"
       action:
         run_playbook:
-          name: ./playbooks/resize-deployment.yaml
+          name: ./playbooks/generic-awx-runner.yaml
+          rulebook_extra_vars:
+             playbookToRun: CP4WAIOPS
+             param1: 1
+             param2: R2D2
+             param3: Naboo
 
 
     - name: Catch All

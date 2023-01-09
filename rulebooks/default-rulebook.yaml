@@ -34,7 +34,6 @@
         run_playbook:
           name: ./playbooks/resize-deployment-catalogue.yaml
           var_root: payload
-          post_events: true
 
     - name: Turbo Resize
       condition: 

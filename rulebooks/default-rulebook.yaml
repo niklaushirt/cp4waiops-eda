@@ -38,3 +38,10 @@
           name: ./playbooks/resize-deployment.yaml
 
 
+    - name: Catch All
+      condition: event.payload.actionID > 0
+      action:
+        run_playbook:
+          name: ./playbooks/catchall.yaml
+
+

@@ -35,6 +35,7 @@ RUN ansible-playbook -i localhost, -c local ansible.eda.install_rulebook_cli --a
 COPY * ./
 COPY ./rulebooks ./rulebooks
 COPY ./playbooks ./playbooks
+COPY ./inventories ./inventories
 
 RUN chmod +x startup.sh
 

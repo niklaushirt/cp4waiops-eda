@@ -31,7 +31,7 @@
           - event.payload.actionState == "READY"
           - event.payload.target.displayName == "catalogue"
       action:
-        run_playbook:
+        debug:
           name: ./playbooks/resize-deployment-catalogue.yaml
 
 

@@ -8,7 +8,13 @@
     - name: debug
       ansible.builtin.debug:
         var: fact
-        
+
+
+    - name: debug
+      ansible.builtin.debug:
+        var: vars
+
+
     - name: 🚀 AWX - Get AWX URL
       shell: |
         export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})

@@ -10,9 +10,9 @@
         var: fact
 
 
-    - name: debug
-      ansible.builtin.debug:
-        var: vars
+    # - name: debug
+    #   ansible.builtin.debug:
+    #     var: vars
 
 
     - name: 🚀 AWX - Get AWX URL

@@ -12,7 +12,7 @@
 
     - name: debug
       ansible.builtin.debug:
-        var: vars.rulebook_extra_vars
+        var: vars.rulebook_extra_vars.fact
 
 
     - name: 🚀 AWX - Get AWX URL

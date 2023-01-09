@@ -39,7 +39,7 @@
 
 
     - name: Catch All
-      condition: event.payload.actionID > 0
+      condition: event.payload.uuid > 0
       action:
         run_playbook:
           name: ./playbooks/catchall.yaml

@@ -27,33 +27,22 @@
     - name: 🚀 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 
       set_fact: AWX_PWD={{ ACT_AWX_PWD.stdout }} 
 
-    - name: 🚀 AWX - Create AWX Execution Environment
-      shell: |
-        export RUNNER_IMAGE=niklaushirt/cp4waiops-awx:0.1.4
-        export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/execution_environments/" -u "admin:{{ AWX_PWD }}" --insecure \
-        -H 'content-type: application/json' \
-        -d $'{
-          "name": "CP4WAIOPS Execution Environment",
-          "description": "CP4WAIOPS Execution Environment",
-          "organization": null,
-          "image": "'$RUNNER_IMAGE'",
-          "credential": null,
-          "pull": "missing"
-        }')
 
-        if [[ $result =~ " already exists" ]];
-        then
-            export EXENV_ID=$(curl -X "GET" -s "{{ AWX_URL }}/api/v2/execution_environments/" -u "admin:{{ AWX_PWD }}" --insecure|jq -c '.results[]| select( .name == "CP4WAIOPS Execution Environment")|.id')
-        else
-            export EXENV_ID=$(echo $result|jq ".id")
-            sleep 60
-        fi 
-        echo "$EXENV_ID"
+    - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
+      shell: |
+        export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/job_templates/7/launch" -u "admin:{{ AWX_PWD }}" --insecure \
+        -H 'content-type: application/json' \
+        -d $'{}')
+
+        echo $result
       ignore_errors: true
-      register: EXENV_ID
+      register: AWX_RESULT
       args:
         executable: /bin/bash
 
-    - name: 🛰️  START - LOAD AWX RUNBOOKS
+    - name: 🛰️  AWX_RESULT
       debug: 
-        msg="{{ EXENV_ID.stdout }}"
+        msg="{{ AWX_RESULT.stdout }}"
+
+
+      

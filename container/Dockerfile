@@ -9,6 +9,7 @@ RUN mkdir -p $DockerHOME
 
 # where your code lives
 WORKDIR $DockerHOME
+RUN mkdir -p $DockerHOME/repo
 
 RUN apt-get update && apt-get install -y \
   openssh-server \

@@ -39,7 +39,7 @@ COPY ./playbooks ./playbooks
 RUN chmod +x startup.sh
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
-ENV EDA_REPO=https://github.com/niklaushirt/cp4waiops-eda.git
+ENV REPO_URL=https://github.com/niklaushirt/cp4waiops-eda.git
 
 ENTRYPOINT /home/app/startup.sh
 

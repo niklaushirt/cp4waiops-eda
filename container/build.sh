@@ -11,6 +11,8 @@ docker push niklaushirt/eda-container:$CONT_VERSION
 
 
 exit 1
+docker run -ti --rm -p 5000:5000 niklaushirt/eda-container:$CONT_VERSION /bin/bash
+ansible-rulebook --rulebook ./rulebooks/default-rulebook.yaml -i inventory.yaml --verbose
 
 
 

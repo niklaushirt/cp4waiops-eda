@@ -43,5 +43,9 @@ RUN chmod +x startup.sh
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
 ENV REPO_URL=https://github.com/niklaushirt/cp4waiops-eda.git
 
+# Install Openshift Client
+RUN wget https://github.com/okd-project/okd/releases/download/4.11.0-0.okd-2022-08-20-022919/openshift-client-linux-4.11.0-0.okd-2022-08-20-022919.tar.gz -O oc.tar.gz && tar xfvz oc.tar.gz && mv oc /usr/local/bin && mv kubectl /usr/local/bin/ && rm oc.tar.gz
+
+
 ENTRYPOINT /home/app/startup.sh
 

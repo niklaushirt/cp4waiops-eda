@@ -24,12 +24,8 @@
       ignore_errors: true
       register: ACT_AWX_URL
 
-    - name: 🟠  AWX URL
-      debug: 
-        msg="{{ ACT_AWX_URL.stdout }}"
 
-
-    - name: 🚀 AWX - Set Fact AWX_URL {{ ACT_AWX_URL.stdout }} 
+    - name: 🟠 AWX - Set Fact AWX_URL {{ ACT_AWX_URL.stdout }} 
       set_fact: AWX_URL={{ ACT_AWX_URL.stdout }} 
 
 
@@ -40,12 +36,7 @@
       ignore_errors: true
       register: ACT_AWX_PWD
 
-    - name: 🟠  AWX PASSWORD
-      debug: 
-        msg="{{ ACT_AWX_PWD.stdout }}"
-
-
-    - name: 🚀 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 
+    - name: 🟠 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 
       set_fact: AWX_PWD={{ ACT_AWX_PWD.stdout }} 
 
 

@@ -2,6 +2,7 @@ echo "--------------------------------------------------------------------------
 echo " 📥 Installing EDA Server"
 oc apply -f ./create-eda.yaml
 
+sleep 15
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 📥 Initialization"
@@ -32,7 +33,6 @@ echo ""
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 📥 Delete Existing EDA Workflow"
 export existingWorkflow=$(echo $workflows|jq  '.[]|select(.displayName | contains("'$WORKFLOW_NAME'"))'| jq -r ".uuid")
-echo $existingWorkflow
 
 if [[ $existingWorkflow != "" ]] ;
 then

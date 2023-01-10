@@ -1,3 +1,7 @@
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Installing EDA Server"
+oc apply -f ./create-eda.yaml
+
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 📥 Initialization"
@@ -29,34 +33,43 @@ echo "--------------------------------------------------------------------------
 echo " 📥 Delete Existing EDA Workflow"
 export existingWorkflow=$(echo $workflows|jq  '.[]|select(.displayName | contains("'$WORKFLOW_NAME'"))'| jq -r ".uuid")
 echo $existingWorkflow
-curl -XDELETE -s -k "https://$TURBO_URL/api/v3/workflows/$existingWorkflow" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'
+
+if [[ $existingWorkflow != "" ]] ;
+then
+    echo "   ✅ Webhook already exists."
+    #curl -XDELETE -s -k "https://$TURBO_URL/api/v3/workflows/$existingWorkflow" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'
+    WF_ID=$existingWorkflow
+else
+    echo "------------------------------------------------------------------------------------------------------------------------------"
+    echo " 📥 Create EDA Workflow"
+    result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/workflows" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {
+            "displayName": "'$WORKFLOW_NAME'",
+            "className": "Workflow",
+            "description": "'$WORKFLOW_NAME'",
+            "discoveredBy":
+            {
+                "readonly": false
+            },
+        "type": "WEBHOOK",
+        "typeSpecificDetails": {
+        "url": "http://'$EDA_URL'/endpoint",
+            "method": "POST",
+            "template": "{  \"uuid\":\"$action.uuid\",  \"createTime\":\"$action.createTime\",  \"actionType\":\"$action.actionType\",  \"actionState\":\"$action.actionState\",  \"actionMode\":\"$action.actionMode\",  \"details\":\"$action.details\",  \"importance\": \"$action.importance\",  \"target\":{    \"uuid\":\"$action.target.uuid\",    \"displayName\":\"$action.target.displayName\",    \"className\":\"$action.target.className\",    \"environmentType\":\"$action.target.environmentType\"  },  \"currentEntity\":{    \"uuid\":\"$action.currentEntity.uuid\",    \"displayName\":\"$action.currentEntity.displayName\",    \"className\":\"$action.currentEntity.className\",    \"environmentType\":\"$action.currentEntity.environmentType\"  },  \"risk\":{      \"subCategory\":\"$action.risk.subCategory\",    \"description\":\"$action.risk.description\",    \"severity\":\"$action.risk.severity\",    \"importance\": \"$action.risk.importance\"  }}",
+            "type": "WebhookApiDTO"
+        }
+        }')
+
+    echo $result| jq -r ".uuid"
+
+    export WF_ID=$(echo $result| jq -r ".uuid")
+    echo "    🛠️ Webhook ID: $WF_ID"
+    echo ""
+fi
 
 
 
-echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Create EDA Workflow"
-result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/workflows" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {
-        "displayName": "'$WORKFLOW_NAME'",
-        "className": "Workflow",
-        "description": "'$WORKFLOW_NAME'",
-        "discoveredBy":
-        {
-            "readonly": false
-        },
-       "type": "WEBHOOK",
-       "typeSpecificDetails": {
-       "url": "http://'$EDA_URL'/endpoint",
-          "method": "POST",
-          "template": "{  \"uuid\":\"$action.uuid\",  \"createTime\":\"$action.createTime\",  \"actionType\":\"$action.actionType\",  \"actionState\":\"$action.actionState\",  \"actionMode\":\"$action.actionMode\",  \"details\":\"$action.details\",  \"importance\": \"$action.importance\",  \"target\":{    \"uuid\":\"$action.target.uuid\",    \"displayName\":\"$action.target.displayName\",    \"className\":\"$action.target.className\",    \"environmentType\":\"$action.target.environmentType\"  },  \"currentEntity\":{    \"uuid\":\"$action.currentEntity.uuid\",    \"displayName\":\"$action.currentEntity.displayName\",    \"className\":\"$action.currentEntity.className\",    \"environmentType\":\"$action.currentEntity.environmentType\"  },  \"risk\":{      \"subCategory\":\"$action.risk.subCategory\",    \"description\":\"$action.risk.description\",    \"severity\":\"$action.risk.severity\",    \"importance\": \"$action.risk.importance\"  }}",
-          "type": "WebhookApiDTO"
-       }
-    }')
 
-echo $result| jq -r ".uuid"
 
-export WF_ID=$(echo $result| jq -r ".uuid")
-echo "    🛠️ Webhook ID: $WF_ID"
-echo ""
 
 
 

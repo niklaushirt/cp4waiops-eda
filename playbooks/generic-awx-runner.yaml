@@ -10,7 +10,7 @@
         var: vars.rulebook_extra_vars.playbookToRun
 
 
-    - name: debug
+    - name: 🟠  PLAYBOOK VARIABLES
       ansible.builtin.debug:
         var: vars.rulebook_extra_vars
 
@@ -23,7 +23,7 @@
       ignore_errors: true
       register: ACT_AWX_URL
 
-    - name: 🛰️  AWX_RESULT
+    - name: 🟠  AWX URL
       debug: 
         msg="{{ ACT_AWX_URL.stdout }}"
 
@@ -39,7 +39,7 @@
       ignore_errors: true
       register: ACT_AWX_PWD
 
-    - name: 🛰️  AWX_RESULT
+    - name: 🟠  AWX PASSWORD
       debug: 
         msg="{{ ACT_AWX_PWD.stdout }}"
 
@@ -62,7 +62,7 @@
       args:
         executable: /bin/bash
 
-    - name: 🛰️  AWX_RESULT
+    - name: 🟠  RUN AWX PLAYBOOK RESULT
       debug: 
         msg="{{ AWX_RESULT.stdout }}"
 

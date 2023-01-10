@@ -39,7 +39,8 @@ cd ..
 cd ..
 sudo rm -r cp4waiops-eda
 git clone https://github.com/niklaushirt/cp4waiops-eda.git
-cd cp4waiops-eda/container/
+cd cp4waiops-eda/BUILD/
 
 export CONT_VERSION=0.1
 docker build -t niklaushirt/eda-container:$CONT_VERSION .
+docker push niklaushirt/eda-container:$CONT_VERSION

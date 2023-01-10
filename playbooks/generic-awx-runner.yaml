@@ -2,16 +2,17 @@
   connection: local
   gather_facts: true
   tasks:
-    - debug:
-        msg: "Turbonomic Resize Catalogue"
+    - name: 🟢  PLAYBOOK NAME
+      debug:
+        msg: "Generic AWX Playbook Launcher"
         
-    - name: PlaybookToRun
-      ansible.builtin.debug:
+    - name: 🟠 PlaybookToRun
+      debug:
         var: vars.rulebook_extra_vars.playbookToRun
 
 
     - name: 🟠  PLAYBOOK VARIABLES
-      ansible.builtin.debug:
+      debug:
         var: vars.rulebook_extra_vars
 
 

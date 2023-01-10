@@ -1,5 +1,6 @@
 - hosts: localhost
   connection: local
   tasks:
-    - debug:
+    - name: 🟢  PLAYBOOK NAME
+      debug:
         msg: "Thank you, my friend!"

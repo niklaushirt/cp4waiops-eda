@@ -47,7 +47,7 @@
         echo "playbookID: $playbookID"
 
 
-        export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json'  -d $'{"extra_vars": "{{ vars.rulebook_extra_vars }}"}')
+        export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
         echo $result
       ignore_errors: true
       register: AWX_RESULT

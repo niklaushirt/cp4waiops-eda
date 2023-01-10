@@ -48,7 +48,7 @@
       set_fact: AWX_PWD={{ ACT_AWX_PWD.stdout }} 
 
 
-    - name: 🚀 AWX - Create AWX Template Create Robotshop Ratings Outage
+    - name: 🚀 AWX - Run AWX Template
       shell: |
         export playbooks=$(curl -X "GET" "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
         export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ vars.rulebook_extra_vars.playbookToRun }}"))|'.id''|head -n1)
@@ -56,7 +56,6 @@
 
 
         export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
-
         echo $result
       ignore_errors: true
       register: AWX_RESULT

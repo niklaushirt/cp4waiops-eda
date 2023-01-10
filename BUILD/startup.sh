@@ -9,5 +9,5 @@ echo ""
 echo ""
 echo ""
 
-./startup.sh
+./startup-server.sh
 

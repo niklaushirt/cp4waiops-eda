@@ -89,20 +89,26 @@ export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contain
 
 
 
+
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue"
+echo " 📥 Test Event Catalogue through Turbonomic"
 echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
 echo ""
 
-echo " 📥 Test Event Other"
+echo " 📥 Test Event Other through Turbonomic"
 echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_notresize}'"
 echo ""
 
 
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Test Event Catalogue direct to EDA"
+echo "curl -XPOST -s -k 'http://$EDA_URL/endpoint'   -H 'Content-Type: application/json;' -H 'accept: application/json' -d @./example_messages/turbo_webhook1.json"
 echo ""
+
+echo ""
+echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Webhook"
 echo "curl -XDELETE -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'"
 echo ""
-
 
 

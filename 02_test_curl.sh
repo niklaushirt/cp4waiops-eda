@@ -5,6 +5,11 @@ echo " 📥 Initialization"
 export TURBO_PASSWORD=P4ssw0rd!
 export WORKFLOW_NAME="EDA_WEBHOOK"
 
+export EDA_URL=$(oc get route -n eda eda-instance -o jsonpath={.spec.host})
+echo "    🌏 EDA_URL:   $EDA_URL"
+
+
+
 export TURBO_URL=$(oc get route -n turbonomic api -o jsonpath={.spec.host})
 echo "    🌏 TURBO_URL: $TURBO_URL"
 echo ""
@@ -23,7 +28,7 @@ echo ""
 echo ""
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Delete Existing EDA Workflow"
+echo " 📥 Get Existing EDA Workflow"
 export existingWorkflow=$(echo $workflows|jq  '.[]|select(.displayName | contains("'$WORKFLOW_NAME'"))'| jq -r ".uuid")
 
 if [[ $existingWorkflow != "" ]] ;
@@ -38,12 +43,13 @@ else
 fi
 
 
-
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Actions for RobotShop"
 export robotshop_id=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/search?types=BusinessApplication" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq '.[]|select(.displayName | contains("RobotShop"))'|jq -r ".uuid")
 #echo $robotshop_id
 #curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq ".[].uuid"
 export actions=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
-#echo $actions|jq
+echo $actions|jq
 
 
 export actionID_resize=$(echo $actions|jq  '.[]|select(.actionType | contains("RESIZE"))'|jq  'select(.target.displayName | contains("catalogue"))'| jq -r ".uuid")
@@ -55,19 +61,23 @@ export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contain
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue"
+echo " 📥 Test Event Catalogue through Turbonomic"
 echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
 echo ""
 
-echo " 📥 Test Event Other"
+echo " 📥 Test Event Other through Turbonomic"
 echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_notresize}'"
 echo ""
 
 
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Test Event Catalogue direct to EDA"
+echo "curl -XPOST -s -k 'http://$EDA_URL/endpoint'   -H 'Content-Type: application/json;' -H 'accept: application/json' -d @./example_messages/turbo_webhook1.json"
 echo ""
+
+echo ""
+echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Webhook"
 echo "curl -XDELETE -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'"
 echo ""
-
-
 

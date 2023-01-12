@@ -15,6 +15,9 @@
       debug:
         var: vars.rulebook_extra_vars
 
+    - name: 🟠  PLAYBOOK VARIABLES ALL
+      debug:
+        var: vars
 
     - name: 🚀 AWX - Get AWX URL
       shell: |

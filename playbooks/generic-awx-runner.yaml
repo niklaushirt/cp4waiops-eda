@@ -22,11 +22,6 @@
 
 
 
-    - name: 🟠  COMBINED PLAYLOAD
-      debug:
-        msg: {"extra_vars": "{{ vars.rulebook_extra_vars }},{{ vars.events.m_0.payload }}"}   
-
-
 
 
     - name: 🚀 AWX - Get AWX URL
@@ -60,7 +55,7 @@
         echo "playbookID: $playbookID"
 
 
-        export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json'  -d $'{"extra_vars": "{{ vars.events.m_0.payload }}"}')
+        export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json'  -d $'{"extra_vars": "{{ vars.rulebook_extra_vars }}"}')
         echo $result
       ignore_errors: true
       register: AWX_RESULT

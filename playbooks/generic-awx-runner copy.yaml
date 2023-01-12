@@ -16,19 +16,6 @@
         var: vars.rulebook_extra_vars
 
 
-    - name: 🟠  PLAYBOOK PLAYLOAD
-      debug:
-        var: vars.events.m_0.payload
-
-
-
-    - name: 🟠  COMBINED PLAYLOAD
-      debug:
-        msg: {"extra_vars": "{{ vars.rulebook_extra_vars }},{{ vars.events.m_0.payload }}"}   
-
-
-
-
     - name: 🚀 AWX - Get AWX URL
       shell: |
         export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})

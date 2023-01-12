@@ -17,7 +17,7 @@
 
     - name: 🟠  PLAYBOOK VARIABLES ALL
       debug:
-        var: vars.events_m_0.payload
+        var: vars.events.m_0.payload
 
     - name: 🚀 AWX - Get AWX URL
       shell: |

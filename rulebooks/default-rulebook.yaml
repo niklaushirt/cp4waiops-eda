@@ -51,6 +51,8 @@
           name: ./playbooks/generic-awx-runner.yaml
           copy_files: true
           var_root: payload
+          post_events: true
+          set_facts: true
           rulebook_extra_vars:
              playbookToRun: ResizeGeneric
              param1: 1

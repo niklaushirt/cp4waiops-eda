@@ -50,7 +50,7 @@
         run_playbook:
           name: ./playbooks/generic-awx-runner.yaml
           copy_files: true
-          var_root: payload
+          #var_root: payload
           post_events: true
           set_facts: true
           rulebook_extra_vars:

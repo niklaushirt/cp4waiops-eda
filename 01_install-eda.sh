@@ -1,5 +1,34 @@
+echo "" 
+echo "" 
+echo "" 
+echo "*****************************************************************************************************************************"
+echo "*****************************************************************************************************************************"
+echo "         ________  __  ___     ___    ________       "     
+echo "        /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____"
+echo "        / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/"
+echo "      _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) "
+echo "     /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  "
+echo "                                           /_/            "
+echo ""
+echo "   🐥 IBM AIOPs - Event Driven Ansible / Turbonomic Integration - PoC"
+echo ""
+echo "*****************************************************************************************************************************"
+echo "*****************************************************************************************************************************"
+echo ""
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Installing EDA Server"
+echo " 📥 Installing EDA Instance"
+echo "----------------------------------------------------------------------------------------------------------------"
+echo "" 
+echo "    🌏  https://github.com/ansible/event-driven-ansible" 
+echo "    🌏  https://github.com/ansible/ansible-rulebook" 
+echo "" 
+echo "" 
+
+
+
+
+
+
 oc apply -f ./create-eda.yaml
 
 sleep 15
@@ -54,7 +83,7 @@ else
         "typeSpecificDetails": {
         "url": "http://'$EDA_URL'/endpoint",
             "method": "POST",
-            "template": "{  \"uuid\":\"$action.uuid\",  \"createTime\":\"$action.createTime\",  \"actionType\":\"$action.actionType\",  \"actionState\":\"$action.actionState\",  \"actionMode\":\"$action.actionMode\",  \"details\":\"$action.details\",  \"importance\": \"$action.importance\",  \"target\":{    \"uuid\":\"$action.target.uuid\",    \"displayName\":\"$action.target.displayName\",    \"className\":\"$action.target.className\",    \"environmentType\":\"$action.target.environmentType\"  },  \"currentEntity\":{    \"uuid\":\"$action.currentEntity.uuid\",    \"displayName\":\"$action.currentEntity.displayName\",    \"className\":\"$action.currentEntity.className\",    \"environmentType\":\"$action.currentEntity.environmentType\"  },  \"risk\":{      \"subCategory\":\"$action.risk.subCategory\",    \"description\":\"$action.risk.description\",    \"severity\":\"$action.risk.severity\",    \"importance\": \"$action.risk.importance\"  }}",
+            "template": "{  \"uuid\":\"$action.uuid\",   \"createTime\":\"$action.createTime\",  \"actionType\":\"$action.actionType\",  \"actionState\":\"$action.actionState\",  \"actionMode\":\"$action.actionMode\",  \"details\":\"$action.details\",  \"importance\": \"$action.importance\",  \"target\":{    \"uuid\":\"$action.target.uuid\",    \"displayName\":\"$action.target.displayName\",    \"className\":\"$action.target.className\",    \"environmentType\":\"$action.target.environmentType\"  },  \"risk\":{      \"subCategory\":\"$action.risk.subCategory\",     \"severity\":\"$action.risk.severity\",    \"importance\": \"$action.risk.importance\"  }}",
             "type": "WebhookApiDTO"
         }
         }')
@@ -74,41 +103,31 @@ fi
 
 
 
-export robotshop_id=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/search?types=BusinessApplication" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq '.[]|select(.displayName | contains("RobotShop"))'|jq -r ".uuid")
-#echo $robotshop_id
-#curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq ".[].uuid"
-export actions=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
-#echo $actions|jq
-
-
-export actionID_resize=$(echo $actions|jq  '.[]|select(.actionType | contains("RESIZE"))'|jq  'select(.target.displayName | contains("catalogue"))'| jq -r ".uuid")
-#echo $actionID_resize
-export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
-#echo $actionID_notresize
-
-
-
-
-
-echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue through Turbonomic"
-echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
 echo ""
-
-echo " 📥 Test Event Other through Turbonomic"
-echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_notresize}'"
 echo ""
+read -p " Do you want to install EDA Server as well (not needed for EDA PoC)❓ [Y,n] " DO_COMM
+if [[ $DO_COMM == "n" ||  $DO_COMM == "N" ]]; then
 
 
-echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue direct to EDA"
-echo "curl -XPOST -s -k 'http://$EDA_URL/endpoint'   -H 'Content-Type: application/json;' -H 'accept: application/json' -d @./example_messages/turbo_webhook1.json"
-echo ""
+    echo "    ⚠️  Skipping"
+    echo "--------------------------------------------------------------------------------------------"
+    echo  ""    
+    echo  ""
+    echo ""
 
-echo ""
-echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 🧻 Delete Webhook"
-echo "curl -XDELETE -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'"
-echo ""
+else
+
+    echo ""
+    echo "----------------------------------------------------------------------------------------------------------------"
+    echo " 🚀  Install EDA Server" 
+    echo "----------------------------------------------------------------------------------------------------------------"
+    echo "" 
+    echo "    🌏  https://github.com/ansible/eda-server" 
+
+    oc create ns eda-server
+    oc apply -n eda-server -f ./eda-server
+fi
+
+
 
 

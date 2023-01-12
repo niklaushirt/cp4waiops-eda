@@ -24,7 +24,7 @@
         run_playbook:
           name: ./playbooks/ping.yaml
 
-          
+
     - name: Turbo Resize - catalogue
       condition: 
         all:
@@ -38,7 +38,7 @@
              playbookToRun: ResizeCatalogue
              param1: 1
              param2: R2D2
-             param3: Naboo
+             param3: {{event.payload.target.displayName}}
 
 
     - name: Turbo Resize
@@ -51,6 +51,21 @@
           name: ./playbooks/generic-awx-runner.yaml
           rulebook_extra_vars:
              playbookToRun: ResizeGeneric
+             param1: 1
+             param2: R2D2
+             param3: Naboo
+
+
+    - name: Turbo Reconfigure
+      condition: 
+        all:
+          - event.payload.actionType == "RECONFIGURE" 
+          - event.payload.actionState == "READY"
+      action:
+        run_playbook:
+          name: ./playbooks/generic-awx-runner.yaml
+          rulebook_extra_vars:
+             playbookToRun: ReconfigureGeneric
              param1: 1
              param2: R2D2
              param3: Naboo

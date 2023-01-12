@@ -49,6 +49,7 @@
       action:
         run_playbook:
           name: ./playbooks/generic-awx-runner.yaml
+          copy_files: true
           rulebook_extra_vars:
              playbookToRun: ResizeGeneric
              param1: 1

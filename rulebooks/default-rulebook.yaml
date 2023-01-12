@@ -53,7 +53,7 @@
              playbookToRun: ResizeGeneric
              param1: 1
              param2: R2D2
-             param3: Naboo
+             param3: event.payload.target.displayName
 
 
     - name: Turbo Reconfigure

@@ -60,6 +60,39 @@ export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contain
 
 
 
+
+export apiSearch=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/search?types=Group" -d '{"className": "VirtualMachine"}' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq)
+echo $apiSearch
+echo $apiSearch|jq '.[].displayName'
+
+
+export entity_id=$(echo $apiSearch|jq '.[]|select(.displayName | contains("vSphere VMs"))'|jq -r ".uuid")
+echo $entity_id
+export actions=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$entity_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
+echo $actions|jq
+
+
+export actionID_resize=$(echo $actions|jq  '.[]|select(.actionType | contains("RESIZE"))'| jq -r ".uuid"|head -n 1)
+echo $actionID_resize
+export actionID_reconfigure=$(echo $actions|jq  '.[]|select(.actionType | contains("RECONFIGURE"))'| jq -r ".uuid"|head -n 1)
+echo $actionID_reconfigure
+export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contains("RECONFIGURE")| not)]'|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
+echo $actionID_notresize
+
+
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Test Event VM Resize through Turbonomic"
+echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
+echo ""
+
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Test Event VM Reconfigure through Turbonomic"
+echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_reconfigure}'"
+echo ""
+
+
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 📥 Test Event Catalogue through Turbonomic"
 echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"

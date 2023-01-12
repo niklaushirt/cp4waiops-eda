@@ -38,7 +38,7 @@
              playbookToRun: ResizeCatalogue
              param1: 1
              param2: R2D2
-             param3: {{event.payload.target.displayName}}
+             param3: event.payload.target.displayName
 
 
     - name: Turbo Resize

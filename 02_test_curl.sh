@@ -48,36 +48,51 @@ echo " 📥 Actions for RobotShop"
 export robotshop_id=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/search?types=BusinessApplication" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq '.[]|select(.displayName | contains("RobotShop"))'|jq -r ".uuid")
 #echo $robotshop_id
 #curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq ".[].uuid"
-export actions=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
-echo $actions|jq
+export actions1=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$robotshop_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
+echo $actions1|jq ".[].details"
 
 
-export actionID_resize=$(echo $actions|jq  '.[]|select(.actionType | contains("RESIZE"))'|jq  'select(.target.displayName | contains("catalogue"))'| jq -r ".uuid")
-#echo $actionID_resize
-export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
-#echo $actionID_notresize
-
-
-
-
-
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Actions for VMs"
 export apiSearch=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/search?types=Group" -d '{"className": "VirtualMachine"}' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq)
-echo $apiSearch
-echo $apiSearch|jq '.[].displayName'
-
+#echo $apiSearch
+#echo $apiSearch|jq '.[].displayName'
 
 export entity_id=$(echo $apiSearch|jq '.[]|select(.displayName | contains("vSphere VMs"))'|jq -r ".uuid")
-echo $entity_id
-export actions=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$entity_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
-echo $actions|jq
+#echo $entity_id
+export actions2=$(curl -XGET -s -k "https://$TURBO_URL/api/v3/entities/$entity_id/actions?limit=500&cursor=0" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json')
+echo $actions2|jq ".[].details"
 
 
-export actionID_resize=$(echo $actions|jq  '.[]|select(.actionType | contains("RESIZE"))'| jq -r ".uuid"|head -n 1)
-echo $actionID_resize
-export actionID_reconfigure=$(echo $actions|jq  '.[]|select(.actionType | contains("RECONFIGURE"))'| jq -r ".uuid"|head -n 1)
-echo $actionID_reconfigure
-export actionID_notresize=$(echo $actions|jq  '[.[]|select(.actionType | contains("RECONFIGURE")| not)]'|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
-echo $actionID_notresize
+
+
+
+
+export actionID_resize=$(echo $actions1|jq  '.[]|select(.actionType | contains("RESIZE"))'|jq  'select(.target.displayName | contains("catalogue"))'| jq -r ".uuid")
+#echo $actionID_resize
+export actionID_notresize=$(echo $actions1|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
+#echo $actionID_notresize
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 📥 Test Event Catalogue through Turbonomic"
+echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
+echo ""
+
+echo " 📥 Test Event Other through Turbonomic"
+echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_notresize}'"
+echo ""
+
+
+
+
+
+
+export actionID_resize=$(echo $actions2|jq  '.[]|select(.actionType | contains("RESIZE"))'| jq -r ".uuid"|head -n 1)
+#echo $actionID_resize
+export actionID_reconfigure=$(echo $actions2|jq  '.[]|select(.actionType | contains("RECONFIGURE"))'| jq -r ".uuid"|head -n 1)
+#echo $actionID_reconfigure
+export actionID_notresize=$(echo $actions2|jq  '[.[]|select(.actionType | contains("RECONFIGURE")| not)]'|jq  '[.[]|select(.actionType | contains("RESIZE")| not)][0]'| jq -r ".uuid")
+#echo $actionID_notresize
 
 
 
@@ -94,17 +109,14 @@ echo ""
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue through Turbonomic"
-echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_resize}'"
+echo " 📥 Test Event Resize VM direct to EDA"
+echo "curl -XPOST -s -k 'http://$EDA_URL/endpoint'   -H 'Content-Type: application/json;' -H 'accept: application/json' -d @./example_messages/turbo_webhook1.json"
 echo ""
 
-echo " 📥 Test Event Other through Turbonomic"
-echo "curl -XPOST -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {\"operation\": \"TEST\",\"actionId\": $actionID_notresize}'"
-echo ""
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 📥 Test Event Catalogue direct to EDA"
+echo " 📥 Test Event Resize Catalogue Deployment direct to EDA"
 echo "curl -XPOST -s -k 'http://$EDA_URL/endpoint'   -H 'Content-Type: application/json;' -H 'accept: application/json' -d @./example_messages/turbo_webhook1.json"
 echo ""
 

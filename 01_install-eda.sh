@@ -88,7 +88,7 @@ else
         }
         }')
 
-    echo $result| jq -r ".uuid"
+    #echo $result| jq -r ".uuid"
 
     export WF_ID=$(echo $result| jq -r ".uuid")
     echo "    🛠️ Webhook ID: $WF_ID"

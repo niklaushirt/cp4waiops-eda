@@ -122,7 +122,7 @@ echo ""
 
 echo ""
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 🧻 Delete Webhook"
+echo " 🧻 Delete Turbonomic Workflow Webhook"
 echo "curl -XDELETE -s -k 'https://$TURBO_URL/api/v3/workflows/$WF_ID' -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'"
 echo ""
 

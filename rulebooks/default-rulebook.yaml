@@ -12,11 +12,6 @@
   ## Define the conditions we are looking for
 
   rules:
-    - name: Say Hello
-      condition: event.payload.message == "Ansible is super cool!"
-      action:
-        run_playbook:
-          name: ./playbooks/say-what.yaml
 
     - name: Ping
       condition: event.payload.message == "ping"
